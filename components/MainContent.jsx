@@ -44,18 +44,7 @@ const MainContent = () => {
       const interval = backgroundAnimation();
       return () => clearInterval(interval);
     }
-  }, [mainContext, videoSpringApi]);
-
-  useEffect(() => {
-    if (mainContext.loaded) {
-      updateSpring(videoSpringApi, {
-        opacity: 1,
-        scale: 1.3,
-      });
-    } else {
-      updateSpring(videoSpringApi, { opacity: 0.5, scale: 1.05, x: 0, y: 0 });
-    }
-  }, [mouseOver, videoSpringApi]);
+  }, [mainContext.loaded]);
 
   const onMouseEnter = () => {
     setMouseOver(true);
