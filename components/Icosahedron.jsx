@@ -1,6 +1,6 @@
 import { useFrame } from "@react-three/fiber";
 import { useRef, useState } from "react";
-import { useSpring, animated } from "@react-spring/three";
+import { useSpring, animated as a } from "@react-spring/three";
 
 const Color = require("color");
 
@@ -12,15 +12,17 @@ const materialColors = [
 ];
 
 const Icosahedron = (context) => {
-  console.log(context.context.mainContext.isDark);
-  const springs = useSpring({ scale: context.context.mouseOver ? 1.4 : 1 });
+  const { scale, rotateZ } = useSpring({
+    scale: context.context.mouseOver ? 2.5 : 2,
+    config: { friction: 5, tension: 200 },
+  });
   const mesh = useRef();
   useFrame((state, delta) => {
     mesh.current.rotation.x += 0.2 * delta;
     mesh.current.rotation.y += 0.5 * delta;
   });
   return (
-    <mesh ref={mesh} style={springs} scale={2.5} position={[0, 0, 0]}>
+    <a.mesh ref={mesh} scale={scale} position={[0, 0, 0]}>
       <icosahedronGeometry />
       <meshPhongMaterial
         shininess={437}
@@ -31,7 +33,7 @@ const Icosahedron = (context) => {
             : materialColors[1].hex()
         }
       />
-    </mesh>
+    </a.mesh>
   );
 };
 

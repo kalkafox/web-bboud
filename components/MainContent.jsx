@@ -40,7 +40,7 @@ const MainContent = () => {
 
   useEffect(() => {
     if (mainContext.loaded) {
-      updateSpring(videoSpringApi, { opacity: 1, scale: 1.3 });
+      updateSpring(videoSpringApi, { opacity: 1, scale: 1.1 });
       const interval = backgroundAnimation();
       return () => clearInterval(interval);
     }
@@ -71,7 +71,7 @@ const MainContent = () => {
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         onMouseOver={() => setMouseOver(true)}>
-        <a.div style={videoSpring} className="fixed w-screen h-screen">
+        <a.div style={videoSpring} className="fixed w-[140%] h-[120%] -top-96">
           <Video />
         </a.div>
         <div

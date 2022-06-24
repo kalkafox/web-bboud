@@ -34,7 +34,7 @@ const Video = () => {
       muted
       loop
       preload={"auto"}
-      className="object-cover w-[120%] h-[120%] absolute -left-10 -top-40 sepia-[.25] saturate-100 blur-sm bg-black">
+      className="object-cover w-[140%] h-[120%] absolute overflow-visible sepia-[.25] saturate-100 blur-sm bg-black">
       <source type="video/mp4" src="/501_501-0536.mp4"></source>
     </video>
   );
