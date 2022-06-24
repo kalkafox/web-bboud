@@ -16,18 +16,21 @@ const Icosahedron = (context) => {
   const springs = useSpring({ scale: context.context.mouseOver ? 1.4 : 1 });
   const mesh = useRef();
   useFrame((state, delta) => {
-    if (context.context.mainContext.isDark) {
-      mesh.current.material.color.set(materialColors[0]);
-    } else {
-      mesh.current.material.color.set(materialColors[1]);
-    }
     mesh.current.rotation.x += 0.2 * delta;
     mesh.current.rotation.y += 0.5 * delta;
   });
   return (
-    <mesh ref={mesh} style={springs} scale={1}>
+    <mesh ref={mesh} style={springs} scale={2.5} position={[0, 0, 0]}>
       <icosahedronGeometry />
-      <meshPhongMaterial color="#efefef" />
+      <meshPhongMaterial
+        shininess={437}
+        refractionRatio={2}
+        color={
+          context.context.mainContext.isDark
+            ? materialColors[0].hex()
+            : materialColors[1].hex()
+        }
+      />
     </mesh>
   );
 };

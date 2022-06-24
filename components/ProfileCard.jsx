@@ -41,9 +41,8 @@ const ProfileCard = () => {
         onMouseLeave={() => setMouseOver(false)}
         className="w-[800px] h-[400px] bg-zinc-300/40 border-zinc-900/50 hover:border-zinc-900 dark:border-zinc-300/50 border-2 hover:dark:border-zinc-300 transition-colors dark:bg-zinc-900/40 dark:text-zinc-300 text-zinc-900 backdrop-blur-lg absolute top-24 text-center rounded-3xl">
         <div className="w-32 h-32 absolute left-2 right-0 m-auto top-4 text-center">
-          <Canvas camera={{ zoom: 2.5 }}>
-            <ambientLight intensity={0.2} />
-            <directionalLight />
+          <Canvas camera={{ zoom: 3, position: [3, 3, 10] }}>
+            <directionalLight scale={3} intensity={0.8} position={[0, 1, 8]} />
             <Icosahedron context={{ mouseOver, mainContext }} />
           </Canvas>
         </div>

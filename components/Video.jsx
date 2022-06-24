@@ -11,7 +11,6 @@ const Video = () => {
       const checkBufferInterval = setInterval(() => {
         let progressNum = 0;
         for (const i = 0; i < videoRef.current.buffered.length; i++) {
-          console.log("ay2");
           progressNum = Math.floor(
             Math.round(
               (videoRef.current.buffered.end(i) / videoRef.current.duration) *

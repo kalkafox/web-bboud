@@ -16,7 +16,7 @@ const Main = () => {
     window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches &&
       setIsDark(true);
-  }, []);
+  });
 
   const [circleLoadSpring, circleLoadSpringApi] = useSpring(() => ({
     config: {

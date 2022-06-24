@@ -27,32 +27,33 @@ const MainContent = () => {
     y: 0,
   }));
 
+  const backgroundAnimation = () => {
+    const interval = setInterval(() => {
+      const x = Date.now() * 0.00005;
+      updateSpring(videoSpringApi, {
+        x: Math.sin(x) * 240,
+        y: Math.cos(x) * 120,
+      });
+    }, 50);
+    return interval;
+  };
+
   useEffect(() => {
     if (mainContext.loaded) {
-      updateSpring(videoSpringApi, { opacity: 0.5, scale: 1.3 });
+      updateSpring(videoSpringApi, { opacity: 1, scale: 1.3 });
+      const interval = backgroundAnimation();
+      return () => clearInterval(interval);
     }
   }, [mainContext, videoSpringApi]);
 
   useEffect(() => {
     if (mainContext.loaded) {
-      if (mouseOver) {
-        updateSpring(videoSpringApi, {
-          opacity: 1,
-          scale: 1.3,
-        });
-        const interval = setInterval(() => {
-          const x = Date.now() * 0.00005;
-          updateSpring(videoSpringApi, {
-            x: Math.sin(x) * 240,
-            y: Math.cos(x) * 120,
-          });
-        }, 50);
-        return () => {
-          clearInterval(interval);
-        };
-      } else {
-        updateSpring(videoSpringApi, { opacity: 0.5, scale: 1.05, x: 0, y: 0 });
-      }
+      updateSpring(videoSpringApi, {
+        opacity: 1,
+        scale: 1.3,
+      });
+    } else {
+      updateSpring(videoSpringApi, { opacity: 0.5, scale: 1.05, x: 0, y: 0 });
     }
   }, [mouseOver, videoSpringApi]);
 
@@ -66,7 +67,10 @@ const MainContent = () => {
 
   return (
     <>
-      <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      <div
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onMouseOver={() => setMouseOver(true)}>
         <a.div style={videoSpring} className="fixed w-screen h-screen">
           <Video />
         </a.div>
