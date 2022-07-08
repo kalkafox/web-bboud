@@ -92,9 +92,11 @@ const ProfileCardContent = () => {
         scale: 1.1,
         opacity: 1,
       });
-      updateSpring(avatarSpringApi, { opacity: 1, scale: 1.1 });
     } else {
-      updateSpring(avatarSpringApi, { opacity: 1, scale: 1 });
+      avatarSpringApi.start({
+        scale: 1,
+        opacity: 1,
+      });
     }
   }, [mouseOver]);
 
