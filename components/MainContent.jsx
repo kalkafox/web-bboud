@@ -31,8 +31,8 @@ const MainContent = () => {
     const interval = setInterval(() => {
       const x = Date.now() * 0.00005;
       updateSpring(videoSpringApi, {
-        x: Math.sin(x) * 240,
-        y: Math.cos(x) * 120,
+        x: Math.sin(x) * 24,
+        y: Math.cos(x) * 24,
       });
     }, 50);
     return interval;
