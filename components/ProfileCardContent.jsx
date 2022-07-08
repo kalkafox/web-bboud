@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 
 import { CircularProgress } from "@mui/material";
 
+import { useContext } from "react";
+import { MainContext } from "../../context/MainContext";
+
 import { useSpring, animated as a } from "react-spring";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,6 +14,7 @@ import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import Image from "next/image";
 
 const ProfileCardContent = () => {
+  const { mouseOver } = useContext(MainContext);
   const [loaded, setLoaded] = useState(false);
   const [profileData, setProfileData] = useState({
     username: "",
@@ -20,6 +24,12 @@ const ProfileCardContent = () => {
     html_url: "",
     twitter_username: "",
   });
+
+  const [avatarSpring, avatarSpringApi] = useSpring(() => ({
+    config: { friction: 5, tension: 200 },
+    scale: 1,
+    opacity: 1,
+  }));
 
   const [profileSpring, profileSpringApi] = useSpring(() => ({
     config: {
@@ -76,13 +86,25 @@ const ProfileCardContent = () => {
     }
   }, [loaded]);
 
+  useEffect(() => {
+    if (mouseOver) {
+      avatarSpringApi.start({
+        scale: 1.1,
+        opacity: 1,
+      });
+      updateSpring(avatarSpringApi, { opacity: 1, scale: 1.1 });
+    } else {
+      updateSpring(avatarSpringApi, { opacity: 1, scale: 1 });
+    }
+  }, [mouseOver]);
+
   return loaded && profileData ? (
     <>
       <a.div
         style={profileSpring}
         className="flex flex-col justify-center items-center relative top-36 font-[Poppins]">
         <div className="flex flex-col justify-center items-center">
-          <div className="rounded-full">
+          <a.div style={avatarSpring} className="rounded-full">
             <Image
               src={profileData.avatar_url}
               alt={profileData.name}
@@ -90,7 +112,7 @@ const ProfileCardContent = () => {
               width="80"
               height="80"
             />
-          </div>
+          </a.div>
           <div className="flex flex-col justify-center items-center">
             <div>
               <h1 className="text-2xl font-bold inline mx-4">
