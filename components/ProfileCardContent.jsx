@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { CircularProgress } from "@mui/material";
 
 import { useContext } from "react";
-import { MainContext } from "../../context/MainContext";
+import { MainContext } from "./Contexts";
 
 import { useSpring, animated as a } from "react-spring";
 
